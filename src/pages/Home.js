@@ -1,0 +1,55 @@
+import styles from '../styles/home.module.css';
+import propTypes from 'prop-types';
+import Comments from '../components/Comments';
+const Home = ({ posts }) => {
+  return (
+    <div className={styles.postsList}>
+      {posts.map((post) => (
+        <div className={styles.postWrapper} key={`post-${post._id}`}>
+          <div className={styles.postHeader}>
+            <div className={styles.postAvatar}>
+              <img
+                src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                alt="user-pic"
+              />
+              <div>
+                <span className={styles.postAuthor}>{post.user.name}</span>
+                <span className={styles.postTime}>a minute ago</span>
+              </div>
+            </div>
+            <div className={styles.postContent}>{post.content}</div>
+
+            <div className={styles.postActions}>
+              <div className={styles.postLike}>
+                <img
+                  src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+                  alt="likes-icon"
+                />
+                <span>{post.likes}</span>
+              </div>
+
+              <div className={styles.postCommentsIcon}>
+                <img
+                  src="https://image.flaticon.com/icons/svg/1380/1380338.svg"
+                  alt="comments-icon"
+                />
+                <span>5</span>
+              </div>
+            </div>
+            <div className={styles.postCommentBox}>
+              <input placeholder="Start typing a comment" />
+            </div>
+            <div className={styles.postCommentsList}>
+              <Comments comments={post.comments}></Comments>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+Home.prototype = {
+  posts: propTypes.array.isRequired,
+};
+export default Home;
