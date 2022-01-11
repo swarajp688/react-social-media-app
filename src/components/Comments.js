@@ -9,7 +9,7 @@ function Comments({comments}) {
       <span className={styles.postCommentLikes}>22</span>
     </div>
 
-    <div className={styles.postCommentContent}>Random</div>
+    <div className={styles.postCommentContent}>{comments.content}</div>
   </div>
   );
 }

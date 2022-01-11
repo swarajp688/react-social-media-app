@@ -1,6 +1,9 @@
 import styles from '../styles/home.module.css';
 import propTypes from 'prop-types';
 import Comments from '../components/Comments';
+
+
+
 const Home = ({ posts }) => {
   return (
     <div className={styles.postsList}>
@@ -40,7 +43,10 @@ const Home = ({ posts }) => {
               <input placeholder="Start typing a comment" />
             </div>
             <div className={styles.postCommentsList}>
-              <Comments comments={post.comments}></Comments>
+              {post.comments.map(comment => (
+                <Comments comments={comment}></Comments>
+              ))}
+              
             </div>
           </div>
         </div>
