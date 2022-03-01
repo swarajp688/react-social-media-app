@@ -4,6 +4,8 @@ import propTypes from 'prop-types';
 import Comments from '../components/Comments';
 import { getPosts } from '../api';
 import { Loader } from '../components';
+import { FcPortraitMode ,FcLike,FcComments } from "react-icons/fc";
+import { Link } from 'react-router-dom';
 
 
 
@@ -34,12 +36,10 @@ const Home = () => {
         <div className={styles.postWrapper} key={`post-${post._id}`}>
           <div className={styles.postHeader}>
             <div className={styles.postAvatar}>
-              <img
-                src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                alt="user-pic"
-              />
+            <FcPortraitMode className={styles.image}/>
+
               <div>
-                <span className={styles.postAuthor}>{post.user.name}</span>
+                <Link to={`/user/${post.user._id}`} state={{user : post.user}} className={styles.postAuthor}>{post.user.name}</Link>
                 <span className={styles.postTime}>a minute ago</span>
               </div>
             </div>
@@ -47,18 +47,12 @@ const Home = () => {
 
             <div className={styles.postActions}>
               <div className={styles.postLike}>
-                <img
-                  src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
-                  alt="likes-icon"
-                />
+                <FcLike />Like
                 <span>{post.likes}</span>
               </div>
 
               <div className={styles.postCommentsIcon}>
-                <img
-                  src="https://image.flaticon.com/icons/svg/1380/1380338.svg"
-                  alt="comments-icon"
-                />
+                <FcComments />
                 <span>5</span>
               </div>
             </div>

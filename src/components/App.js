@@ -1,6 +1,6 @@
 import { Loader, Navbar } from '.';
 
-import { Home, Login, Settings, Signup } from '../pages';
+import { Home, Login, Settings, Signup, UserProfile } from '../pages';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks';
 
@@ -34,6 +34,8 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/settings" element={<PrivateRoute><Settings/> </PrivateRoute>}> </Route>
+          <Route path="/user/:userId" element={<PrivateRoute><UserProfile /> </PrivateRoute>}> </Route>
+        
         </Routes>
         
       </BrowserRouter>
