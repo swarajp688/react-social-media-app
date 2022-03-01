@@ -14,18 +14,20 @@
     color: #ece60e;
   }
   .nav .userDp {
-    height: 40px;
+    height: 30px;
+    width: 40px;
+    padding: 5px;
   }
   .nav .user {
     display: flex;
     align-items: center;
-    
+    width: 20px;
   }
   .nav span {
     margin-left: 10px;
     position: absolute;
-    top: 43px;
-    right: 200px
+    top: 20px;
+    right: 150px
   }
   .nav .rightNav {
     display: flex;
@@ -38,9 +40,11 @@
   .nav .navLinks ul {
     display: flex;
     list-style-type: none;
+    margin: 7px 0px;
   }
   .nav .navLinks ul li {
-    padding: 0 4px;
+    padding: 0 0px;
+    margin: 0px 5px;
   }
   .nav .navLinks ul li a {
     text-decoration: none;
@@ -112,4 +116,11 @@
   }
   .searchResultsRow img {
     height: 27px;
+  }
+
+
+  .avatar {
+    width: 20px;
+    height: 20px;
+
   }

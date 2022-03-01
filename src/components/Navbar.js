@@ -1,50 +1,44 @@
 import { Link } from 'react-router-dom';
-import { useAuth } from '../hooks';
-
 import styles from '../styles/navbar.module.css';
-
-
+import { useAuth } from '../hooks';
+import { FcPortraitMode } from "react-icons/fc";
 const Navbar = () => {
   const auth = useAuth();
+
   return (
     <div className={styles.nav}>
       <div className={styles.leftDiv}>
-        <a href="/">
+        <Link to="/">
           <img
             alt=""
             src="https://ninjasfiles.s3.amazonaws.com/0000000000003454.png"
-          ></img>
-        </a>
+          />
+        </Link>
       </div>
-      <div className={styles.rightDiv}>
+
+      <div className={styles.rightNav}>
         {auth.user && (
           <div className={styles.user}>
-            <a href="/">
-              <img
-                alt=""
-                src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                className={styles.userDp}
-              ></img>
-            </a>
             <span>{auth.user.name}</span>
+            <Link to="/settings">
+            <FcPortraitMode className={styles.userDp}/>
+            </Link>
           </div>
         )}
+
         <div className={styles.navLinks}>
           <ul>
             {auth.user ? (
               <>
-                <li onClick={auth.logout}>
-                  Log out
-                </li>
+                <li onClick={auth.logout}>Log out</li>
               </>
             ) : (
               <>
                 <li>
-                  <Link to="/login">Log In</Link>
+                  <Link to="/login">Login</Link>
                 </li>
-
                 <li>
-                  <a href="/signup">Register</a>
+                  <Link to="/signup">Register</Link>
                 </li>
               </>
             )}
