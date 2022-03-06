@@ -4,5 +4,5 @@ import Navbar from "./Navbar";
 export {
     App,
     Loader,
-    Navbar
+    Navbar,
 }

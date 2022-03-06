@@ -1,6 +1,6 @@
 import { useContext, useState ,useEffect} from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { editProfile, login as userLogin, register } from "../api";
+import { editProfile, login as userLogin, register , fetchFriends} from "../api";
 import { getItemFromLocalStorage, LOCALSTORAGE_TOKEN_KEY, removeItemFromLocalStorage, setItemInLocalStorage } from "../utils";
 import jwtDecode from "jwt-decode";
 export const useAuth = ()=> {
@@ -11,13 +11,26 @@ export const useProvideAuth = ()=> {
     const [user , setUser] = useState(null);
     const [loading , setLoading]= useState(true);
     useEffect(() => {
-        const userToken = getItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
-        if(userToken){
-            const user =jwtDecode(userToken);
-            setUser(user);
-
+        const getUser =async ()=>{
+            const userToken = getItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
+            if(userToken){
+                let friends = [];
+                const user =jwtDecode(userToken);
+                const response = await fetchFriends();
+                
+                if(response.success){
+                    friends= response.data.friends;
+                }
+                setUser({
+                    ...user,
+                    friends,
+                });
+                
+            }
+            setLoading(false);
         }
-        setLoading(false);
+        
+        getUser();
     }, [])
 
     const login = async (email , password)=> {
@@ -70,7 +83,22 @@ export const useProvideAuth = ()=> {
         removeItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);  
 
     };
+    const updateUserFriends = (addFriend,friend)=>{
+        if(addFriend) {
+            console.log('main user', user)
+            setUser({
+                ...user,
+                friend:[...user.friends, friend]
+            })
+            return;
+        }
+        const newFriend = user.friends.filter((f)=> f.to_user._id !== friend.to_user._id);
+        setUser({
+            ...user,
+            friends: newFriend,
+        })
 
+    }
     return {
         user,
         login,
@@ -78,5 +106,6 @@ export const useProvideAuth = ()=> {
         loading,
         signup,
         updateUser,
+        updateUserFriends,
     }
 }

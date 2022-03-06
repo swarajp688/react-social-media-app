@@ -14,6 +14,7 @@ const Home = () => {
   const [posts , setPosts] = useState([]);
   const [loading , setLoading] = useState(true);
   useEffect(()=>{
+    console.log('home useEffect')
     const fetchPosts = async ()=>{
       const response = await getPosts();
       console.log('response', response);
