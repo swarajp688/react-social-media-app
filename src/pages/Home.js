@@ -3,14 +3,15 @@ import styles from '../styles/home.module.css';
 import propTypes from 'prop-types';
 import Comments from '../components/Comments';
 import { getPosts } from '../api';
-import { Loader } from '../components';
+import { FriendsList, Loader } from '../components';
 import { FcPortraitMode ,FcLike,FcComments } from "react-icons/fc";
 import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks';
 
 
 
 const Home = () => {
-
+  const auth= useAuth();
   const [posts , setPosts] = useState([]);
   const [loading , setLoading] = useState(true);
   useEffect(()=>{
@@ -32,6 +33,7 @@ const Home = () => {
     return <Loader></Loader>
   }
   return (
+    <div className={styles.home}>
     <div className={styles.postsList}>
       {posts.map((post) => (
         <div className={styles.postWrapper} key={`post-${post._id}`}>
@@ -69,6 +71,8 @@ const Home = () => {
           </div>
         </div>
       ))}
+    </div>
+    {auth.user ? <FriendsList /> : <></>}
     </div>
   );
 };

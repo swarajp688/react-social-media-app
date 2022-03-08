@@ -2,10 +2,11 @@ import styles from '../styles/settings.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FcPortraitMode } from 'react-icons/fc';
 import { useEffect, useState } from 'react';
-import { userInfo, fetchFriends, addFriend, removeFriend } from '../api';
+import { userInfo, addFriend, removeFriend } from '../api';
 import { useToasts } from 'react-toast-notifications';
 import { Loader } from '../components';
 import { useAuth } from '../hooks';
+
 
 const UserProfile = () => {
   const { addToast } = useToasts();
@@ -18,6 +19,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     console.log('user profile useEffect');
+    console.log(userId);
     const getUser = async () => {
       const response = await userInfo(userId);
 
@@ -36,11 +38,14 @@ const UserProfile = () => {
 
   const checkIfUserIsFriend = () => {
     const friends = auth.user.friends;
-    const friendsIds = friends.map((friend) => friend.to_user._id);
-    const index = friendsIds.indexOf(userId);
+
+    const friendIds = friends.map((friend) => friend.to_user._id);
+    const index = friendIds.indexOf(userId);
+
     if (index !== -1) {
       return true;
     }
+
     return false;
   };
 
@@ -50,7 +55,7 @@ const UserProfile = () => {
 
     if (response.success) {
       const friendShip = auth.user.friends.filter(
-        (friend) => friend.to_user._id == userId
+        (friend) => friend.to_user._id === userId
       );
       auth.updateUserFriends(false, friendShip[0]);
       addToast('Friend Removed', {
@@ -82,8 +87,9 @@ const UserProfile = () => {
         appearance: 'errors',
       });
     }
-
+    
     setProgress(false);
+
   };
 
   if (loading) {
