@@ -134,10 +134,24 @@ export const useProvidePosts = ()=> {
         const newPosts = [post , ...posts];
         setPosts(newPosts);
       }
+     const addCommentToState = (comment , postId)=> {
+         const newPost = posts.map((post)=> {
+             if(post._id === postId){
+                 console.log('comment',post)
+                 return {
+                     ...post,
+                     comments : [...post.comments ,comment]
+                 }
+             }
+             return post;
+         })
+         setPosts(newPost);
+     }
     return {
         data:posts,
         loading,
         addPostsToState,
+        addCommentToState
     }
 
 }
