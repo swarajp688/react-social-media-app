@@ -6,7 +6,7 @@ const FriendsList = () => {
     const auth = useAuth();
     const {friends= []}= auth.user;
   return (
-    <div className={styles.FriendList}>
+    <div className={styles.friendsList}>
       <div className={styles.header}>Friends</div>
 
       {friends && friends.length === 0 && (<div className={styles.noFriends}>No Friends Found</div>)}

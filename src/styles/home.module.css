@@ -158,7 +158,9 @@
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   overflow-y: scroll;
+  
 }
+
 .friendsList .header {
   border-bottom: 1px solid #e0e0e0;
   font-weight: 600;
@@ -194,4 +196,52 @@
 }
 .postsList {
   flex: 1;
+}
+
+
+/* Create Post */
+.createPost {
+  border: 1px solid grey;
+  background: white;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+.createPost > div {
+  padding: 10px;
+  border-top: 1px solid #d0d0d0;
+  display: flex;
+  justify-content: flex-end;
+}
+.addPost {
+  
+  height: 90px !important;
+  padding: 10px;
+  width: 100% !important;
+  box-sizing: border-box;
+  font-size: 15px;
+  border: none;
+  resize: none;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  background: rgb(255, 255, 255);
+}
+
+.addPostBtn {
+  width: 112px;
+  height: 42px;
+  left: 111.5px;
+  top: 0px;
+  background: #ef7917;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+}
+.addPostBtn:focus,
+.createPost textarea:focus {
+  outline: none;
+}
+.addPostBtn:hover {
+  cursor: pointer;
 }

@@ -1,6 +1,6 @@
 import { useContext, useState ,useEffect} from "react";
-import { AuthContext } from "../providers/AuthProvider";
-import { editProfile, login as userLogin, register , fetchFriends} from "../api";
+import { AuthContext, PostsContext } from "../providers";
+import { editProfile, login as userLogin, register , fetchFriends,getPosts} from "../api";
 import { getItemFromLocalStorage, LOCALSTORAGE_TOKEN_KEY, removeItemFromLocalStorage, setItemInLocalStorage } from "../utils";
 import jwtDecode from "jwt-decode";
 export const useAuth = ()=> {
@@ -108,4 +108,36 @@ export const useProvideAuth = ()=> {
         updateUser,
         updateUserFriends,
     }
+}
+
+export const usePosts =  ()=> {
+    return useContext(PostsContext);
+}
+export const useProvidePosts = ()=> {
+    const [posts , setPosts] = useState(null);
+    const [loading , setLoading]= useState(true);
+    useEffect(()=>{
+        console.log('home useEffect')
+        const fetchPosts = async ()=>{
+          const response = await getPosts();
+          console.log('response', response);
+          if(response.success) {
+            setPosts(response.data.posts);
+          }
+          setLoading(false);
+        }
+        fetchPosts();
+        
+    
+      },[]);
+      const addPostsToState=(post)=>{
+        const newPosts = [post , ...posts];
+        setPosts(newPosts);
+      }
+    return {
+        data:posts,
+        loading,
+        addPostsToState,
+    }
+
 }
