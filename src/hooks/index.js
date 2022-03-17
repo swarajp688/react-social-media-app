@@ -147,11 +147,13 @@ export const useProvidePosts = ()=> {
          })
          setPosts(newPost);
      }
+    
     return {
         data:posts,
         loading,
         addPostsToState,
-        addCommentToState
+        addCommentToState,
+        
     }
 
 }
